@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Criei em 14/09/2024 -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_mapa" android:title="Mapa" />
+    <item android:id="@+id/menu_telefone" android:title="Telefone" />
+    <item android:id="@+id/menu_email" android:title="Email" />
+    <item android:id="@+id/menu_editar" android:title="Editar" />
+    <item android:id="@+id/menu_excluir" android:title="Excluir" />
+</menu>
+
