@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu de opções</title>
   </head>
-  <body>
-    <style>
+   <style>
         .card {
             display: flex;
             flex-direction: column;
@@ -28,8 +27,9 @@
         .container{
             display: grid;
             grid-template-columns:50% 50% ;
-            justify-content: center;
             padding: 2em;
+            max-width: 1200px;
+
         }
         .alinha-fim{
             display: flex;
@@ -38,9 +38,14 @@
         .alinha-fim img{
             width: 6em;
         }
+        body{
+          display: flex;
+          justify-content: center;
+        }
 
     </style>
 
+  <body>  
     <main>
       <div class="container">
         <div class="card">
@@ -80,7 +85,6 @@
       <div class="alinha-fim">
         <img src="img/settings.png">
       </div>
-    </div>
     </main>
   </body>
 </html>
