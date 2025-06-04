@@ -33,29 +33,7 @@ html, body {
         height: auto;
         margin: 0 auto;
     }
-.btn_enviar {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background-color: #2d3e50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn_esqueci_senha {
-    display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background-color: #2d3e50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn_cadastrar {
+    .btn_enviar, .btn_esqueci_senha, .btn_cadastrar {
       display: block;
       width: 100%;
       padding: 10px;
