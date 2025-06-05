@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Alunos</title>
+  <link rel="stylesheet" href="alunos.css">
+</head>
+<body>
+  <div class="container">
+    
+
+    <div class="alunos-section">
+      <img src="img/grupo.png" alt="Alunos" class="icon">
+      <h2>ALUNOS</h2>
+
+      <div class="search">
+        <label for="studentSelect">BUSCAR:</label>
+        <select id="studentSelect">
+          <option value="ned">NED LEEDS</option>
+          <option value="mj">MICHELLE JONES</option>
+          <option value="peter">PETER PARKER</option>
+        </select>
+      </div>
+
+      <div id="studentCard" class="card">
+        <img id="studentImage" src="img/icon_pessoa.png" alt="Foto do aluno">
+        <h3 id="studentName"></h3>
+        <p><strong>EMAIL:</strong> <span id="studentEmail"></span></p>
+        <p><strong>CONTATO:</strong> <span id="studentContact"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="alunos.js"></script>
+</body>
+</html>
