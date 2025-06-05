@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="calendario.css">
+    <style>
+        body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conteiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 80vh;
+    background-color:white;
+    flex-direction: column;
+    gap: 30px;
+}
+img{
+    width: 70px;
+    height: 70px;
+}
+.mes button{
+    background-color: rgba(128, 128, 128, 0.527);
+    border: 0px solid black;
+    border-radius: 15px;
+    padding: 4px 10px;
+    margin: 6px;
+    cursor: pointer;
+}
+
+.mes{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+}
+.calendario{
+    background-color: rgba(128, 128, 128, 0.192);
+    width: 300px;
+    height: auto;
+}
+.calendario h2{
+    background-color: rgba(138, 138, 138, 0.76);
+    margin: 0px;
+    padding: 2px 5px;
+}
+.calendario-box{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap:5px;
+    margin: 4px;
+}
+.dia{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.semana{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.legenda{
+    display: flex;
+    flex-direction: row;
+}
+.legenda .circulo{
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}
+.legenda div{
+    display: flex;
+    flex-direction: row;
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+</head>
+<body>
+    <div class="conteiner">
+    <img src="img/calendario.png" alt="">
+        
+    <div class="mes">
+        <button>Jan</button>
+        <button>Fev</button>
+        <button>Mar</button>
+        <button>Abr</button>
+        <button>Mai</button>
+        <button>Jun</button>
+        <button>Jul</button>
+        <button>Ago</button>
+        <button>Set</button>
+        <button>Out</button>
+        <button>Nov</button>
+        <button>Dez</button>    
+    </div>
+        <div class="calendario">
+            <h2 >Junho</h2>
+            <div class="calendario-box">
+                <div class="semana">D</div>
+                <div class="semana">S</div>
+                <div class="semana">T</div>
+                <div class="semana">Q</div>
+                <div class="semana">Q</div>
+                <div class="semana">S</div>
+                <div class="semana">S</div>
+                <div class="dia"></div>
+                <div class="dia"></div>
+                <div class="dia"></div>
+                <div class="dia">1</div>
+                <div class="dia">2</div>
+                <div class="dia">3</div>
+                <div class="dia">4</div>
+                <div class="dia">5</div>
+                <div class="dia">6</div>
+                <div class="dia">7</div>
+                <div class="dia">8</div>
+                <div class="dia">9</div>
+                <div class="dia">10</div>
+                <div class="dia">11</div>
+                <div class="dia">12</div>
+                <div class="dia">13</div>
+                <div class="dia">14</div>
+                <div class="dia">15</div>
+                <div class="dia">16</div>
+                <div class="dia">17</div>
+                <div class="dia">18</div>
+                <div class="dia">19</div>
+                <div class="dia">20</div>
+                <div class="dia">21</div>
+                <div class="dia">22</div>
+                <div class="dia">23</div>
+                <div class="dia">24</div>
+                <div class="dia">25</div>
+                <div class="dia">26</div>
+                <div class="dia">27</div>
+                <div class="dia">28</div>
+                <div class="dia">29</div>
+                <div class="dia">30</div>
+                <div class="dia">31</div>
+                <div class="dia"></div>
+                
+            </div>
+
+        </div>
+        <div class="legenda">
+            <div>
+                <p>Letivo</p>
+                <div class="circulo"></div>
+            </div>
+            <div>
+                <p>Falta</p>
+                <div class="circulo"></div>
+            </div>
+            <div>
+                <p>Não letivo</p>
+                <div class="circulo"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
