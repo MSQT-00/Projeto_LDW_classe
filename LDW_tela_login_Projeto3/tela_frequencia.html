@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequência</title>
+  <link rel="stylesheet" href="frequenciastyle.css">
+</head>
+<body>
+
+    <img src="icone_checklist.jfif">
+
+    <h1>Frequência Global</h1>
+
+    <p>Hoje: <span id="dataAtual"></span></p>
+
+    <script>
+  const hoje = new Date();
+
+  const dataFormatada = hoje.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
+  document.getElementById('dataAtual').textContent = dataFormatada;
+</script>
+
+<div class="faltas">
+  <p>Faltas: <span id="porcentagem">0%</span></p>
+</div>
+
+<p>
+ <img src="icone_calendario.png" alt="Ícone" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;">
+  Datas com Faltas:
+</p>
+ 
+<div class="datas">
+
+
+  <div class="container-datas">
+    <ol id="datas-ul"></ol>
+  </div>
+</div>
+
+
+<script>
+  // Suponha que essas são as datas que você quer exibir:
+  const datas = [
+    '2025-06-01',
+    '2025-05-31',
+    '2025-05-05',
+    '2025-04-16',
+    '2025-03-02'
+  ];
+
+  const lista = document.getElementById('datas-ul');
+
+  datas.forEach(dataStr => {
+    const dataObj = new Date(dataStr);
+    const dataFormatada = dataObj.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    const item = document.createElement('li');
+    item.textContent = dataFormatada;
+    lista.appendChild(item);
+  });
+</script>
