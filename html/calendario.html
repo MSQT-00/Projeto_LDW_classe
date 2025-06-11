@@ -1,32 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style_model.css"> <!-- CSS PADRÃO -->
     <title>Calendário Dinâmico</title>
     <style>
-        body {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        .conteiner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 400px;
-            height: 80vh;
-            background-color: white;
-            flex-direction: column;
-            gap: 30px;
-            padding: 20px;
-            box-shadow: 0 0 10px #ccc;
-            border-radius: 10px;
-        }
+      
+        
         img {
             width: 70px;
             height: 70px;
@@ -111,14 +92,49 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            gap: 6px;
-            margin: 8px;
+            gap: 3px;
+            margin: 5px;
         }
+        .botoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit{
+    margin-top:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.save {
+  background-color: #00c000;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+
+}
     </style>
 </head>
 <body>
-    <div class="conteiner">
-        <img src="img/calendario.png" alt="Calendário" />
+    <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="./img/casa-simples-fina.png"/></div>
+  </header>
+  <main>
+    
+        <img src="../img/calendario.png" alt="Calendário" />
 
         <div class="mes" id="botoes-meses">
             <!-- Botões do mês serão gerados via JS -->
@@ -145,7 +161,23 @@
                 <div class="circulo" style="background-color: gray;"></div>
             </div>
         </div>
+
+          <div class="botoes">
+
+      <button class="edit">
+        <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="Editar" />
+      </button>
+      <button class="save">GRAVAR</button>
     </div>
+
+    </main>
+
+  
+
+    <footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
 
 <script>
     const meses = [
@@ -244,6 +276,8 @@
     // Inicializa
     gerarBotoesMeses();
     atualizarCalendario();
+
+    
 </script>
 </body>
 </html>
