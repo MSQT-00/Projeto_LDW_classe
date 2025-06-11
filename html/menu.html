@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu de opções</title>
+  </head>
+   <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(229, 229, 229);
+            padding: 1em;
+            margin: 2em;
+            align-items: center;
+        }
+        .card img{
+            max-width: 30%;
+        }
+        .card p{
+            color: rgb(66, 66, 66);
+            font-size: large;
+        }
+        .card:hover{
+            background-color: rgb(195, 193, 193);
+        }
+        .container{
+            display: grid;
+            grid-template-columns:50% 50% ;
+            padding: 2em;
+            max-width: 1200px;
+
+        }
+        .alinha-fim{
+            display: flex;
+            justify-content: end;
+        }
+        .alinha-fim img{
+            width: 6em;
+        }
+        body{
+          display: flex;
+          justify-content: center;
+        }
+
+    </style>
+
+  <body>  
+    <main>
+      <div class="container">
+        <div class="card">
+          <img src="img/calendario.png " />
+          </span>
+          <p>CALENDÁRIO</p>
+        </div>
+        <div class="card">
+          <img src="img/relogio.png " />
+          <p>HORÁRIO</p>
+        </div>
+        <div class="card">
+          <img src="img/professor-no-quadro.png " />
+          <p>PROFESSORES</p>
+        </div>
+        <div class="card">
+          <img src="img/alunos.png " />
+          <p>ALUNOS</p>
+        </div>
+        <div class="card">
+          <img src="img/select_95365.png " />
+          <p>FREQUÊNCIA</p>
+        </div>
+        <div class="card">
+          <img src="img/anotacao.png " />
+          <p>NOTAS</p>
+        </div>
+        <div class="card">
+          <img src="img/anotacao.webp " />
+          <p>ANOTAÇÕES</p>
+        </div>
+        <div class="card">
+          <img src="img/perfil.png " />
+          <p>MEU PERFIL</p>
+        </div>
+      </div>
+      <div class="alinha-fim">
+        <img src="img/settings.png">
+      </div>
+    </main>
+  </body>
+</html>

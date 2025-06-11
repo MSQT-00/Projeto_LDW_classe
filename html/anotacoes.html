@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anotações</title>
+  <link rel="stylesheet" href="style_model.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<style>
+  .note-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background: #f2f2f2;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.icon {
+  width: 60px;         
+  height: auto;        
+  display: block;
+  margin: 0 auto 10px; 
+}
+
+
+.note-list input[type="text"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+}
+
+/* Área de ícones */
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.icon-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* Botão de adicionar anotação */
+.add-note-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.add-note-btn i {
+  margin-right: 5px;
+}
+
+/* Campo de anotação */
+textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  resize: none;
+  margin-top: 10px;
+}
+
+/* Botões inferiores */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.save-btn {
+  background-color: #009933;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.exit-btn {
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+</style>
+<body>
+   <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
+  </header>
+
+<main>
+  <div class="container">
+   
+
+    <section class="anotacoes-section">
+      <img src="../img/anotacoes.png" alt="Anotações" class="icon"/>
+      <h2>ANOTAÇÕES</h2>
+
+      <ul class="note-list">
+  <li>
+    <input type="text" value="01/06/22 - 1" />
+    <div class="icon-group">
+      <button class="icon-btn"><img src="../img/lapis.png" alt="Editar" /></button>
+      <button class="icon-btn"><img src="../img/lixo.png" alt="Excluir" /></button>
+    </div>
+  </li>
+  <li>
+    <input type="text" value="02/06/22 - 2" />
+    <div class="icon-group">
+      <button class="icon-btn"><img src="../img/lapis.png" alt="Editar" /></button>
+      <button class="icon-btn"><img src="../img/lixo.png" alt="Excluir" /></button>
+    </div>
+  </li>
+</ul>
+      <button class="add-note-btn"><i class="fas fa-plus-circle"></i> ADICIONAR ANOTAÇÃO</button>
+
+      <textarea placeholder="Digite uma nova anotação..."></textarea>
+
+      <div class="button-group">
+        <button class="save-btn">GRAVAR</button>
+       
+      </div>
+    </section>
+  </div>
+  </main>
+
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
+</body>
+</html>

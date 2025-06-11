@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calendário Dinâmico</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .conteiner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            height: 80vh;
+            background-color: white;
+            flex-direction: column;
+            gap: 30px;
+            padding: 20px;
+            box-shadow: 0 0 10px #ccc;
+            border-radius: 10px;
+        }
+        img {
+            width: 70px;
+            height: 70px;
+        }
+        .mes button {
+            background-color: rgba(128, 128, 128, 0.527);
+            border: 0;
+            border-radius: 15px;
+            padding: 4px 10px;
+            margin: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .mes button:hover,
+        .mes button.active {
+            background-color: rgba(128, 128, 128, 0.8);
+            color: white;
+        }
+        .mes {
+            display: grid;
+            grid-template-columns: repeat(6, auto);
+            justify-content: center;
+            gap: 6px;
+            user-select: none;
+        }
+        .calendario {
+            background-color: rgba(128, 128, 128, 0.192);
+            width: 300px;
+            border-radius: 8px;
+            padding-bottom: 10px;
+        }
+        .calendario h2 {
+            background-color: rgba(138, 138, 138, 0.76);
+            margin: 0;
+            padding: 8px 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .calendario-box {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin: 4px 8px;
+            font-family: Arial, sans-serif;
+        }
+        .semana, .dia {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            font-weight: bold;
+        }
+        .dia {
+            font-weight: normal;
+            cursor: default;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .dia.empty {
+            background-color: transparent;
+            cursor: default;
+        }
+        .dia:hover:not(.empty) {
+            background-color: rgba(128,128,128,0.3);
+        }
+        .legenda {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .legenda .circulo {
+            width: 15px;
+            height: 15px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+        .legenda div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <img src="img/calendario.png" alt="Calendário" />
+
+        <div class="mes" id="botoes-meses">
+            <!-- Botões do mês serão gerados via JS -->
+        </div>
+
+        <div class="calendario">
+            <h2 id="titulo-mes">Junho</h2>
+            <div class="calendario-box" id="calendario-box">
+                <!-- Dias da semana e dias do mês serão gerados aqui -->
+            </div>
+        </div>
+
+        <div class="legenda">
+            <div>
+                <p>Letivo</p>
+                <div class="circulo" style="background-color: blue;"></div>
+            </div>
+            <div>
+                <p>Falta</p>
+                <div class="circulo" style="background-color: red;"></div>
+            </div>
+            <div>
+                <p>Não letivo</p>
+                <div class="circulo" style="background-color: gray;"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const meses = [
+        { nome: "Jan", completo: "Janeiro" },
+        { nome: "Fev", completo: "Fevereiro" },
+        { nome: "Mar", completo: "Março" },
+        { nome: "Abr", completo: "Abril" },
+        { nome: "Mai", completo: "Maio" },
+        { nome: "Jun", completo: "Junho" },
+        { nome: "Jul", completo: "Julho" },
+        { nome: "Ago", completo: "Agosto" },
+        { nome: "Set", completo: "Setembro" },
+        { nome: "Out", completo: "Outubro" },
+        { nome: "Nov", completo: "Novembro" },
+        { nome: "Dez", completo: "Dezembro" }
+    ];
+
+    const diasSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
+
+    const botoesMeses = document.getElementById("botoes-meses");
+    const tituloMes = document.getElementById("titulo-mes");
+    const calendarioBox = document.getElementById("calendario-box");
+
+    let mesSelecionado = 5; // Junho (index 5, começando do 0)
+    let anoAtual = new Date().getFullYear();
+
+    function gerarBotoesMeses() {
+        meses.forEach((mes, index) => {
+            const btn = document.createElement("button");
+            btn.textContent = mes.nome;
+            btn.dataset.mes = index;
+            if(index === mesSelecionado) btn.classList.add("active");
+            btn.addEventListener("click", () => {
+                mesSelecionado = index;
+                atualizarCalendario();
+                atualizarBotoes();
+            });
+            botoesMeses.appendChild(btn);
+        });
+    }
+
+    function atualizarBotoes() {
+        const botoes = botoesMeses.querySelectorAll("button");
+        botoes.forEach((btn, index) => {
+            btn.classList.toggle("active", index === mesSelecionado);
+        });
+    }
+
+    function gerarDiasSemana() {
+        diasSemana.forEach(dia => {
+            const div = document.createElement("div");
+            div.classList.add("semana");
+            div.textContent = dia;
+            calendarioBox.appendChild(div);
+        });
+    }
+
+    function diasNoMes(mes, ano) {
+        return new Date(ano, mes + 1, 0).getDate();
+    }
+
+    function diaSemanaDoPrimeiroDia(mes, ano) {
+        return new Date(ano, mes, 1).getDay();
+    }
+
+    function atualizarCalendario() {
+        // Limpar dias antigos (tira os dias da semana, vamos redesenhar)
+        calendarioBox.innerHTML = "";
+
+        // Mostrar dias da semana
+        gerarDiasSemana();
+
+        // Atualizar título
+        tituloMes.textContent = meses[mesSelecionado].completo;
+
+        const primeiroDiaSemana = diaSemanaDoPrimeiroDia(mesSelecionado, anoAtual);
+        const totalDias = diasNoMes(mesSelecionado, anoAtual);
+
+        // Adiciona os espaços vazios antes do primeiro dia do mês
+        for(let i = 0; i < primeiroDiaSemana; i++) {
+            const vazio = document.createElement("div");
+            vazio.classList.add("dia", "empty");
+            vazio.textContent = "";
+            calendarioBox.appendChild(vazio);
+        }
+
+        // Adiciona os dias do mês
+        for(let dia = 1; dia <= totalDias; dia++) {
+            const diaDiv = document.createElement("div");
+            diaDiv.classList.add("dia");
+            diaDiv.textContent = dia;
+            calendarioBox.appendChild(diaDiv);
+        }
+    }
+
+    // Inicializa
+    gerarBotoesMeses();
+    atualizarCalendario();
+</script>
+</body>
+</html>

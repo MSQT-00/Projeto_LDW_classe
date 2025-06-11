@@ -1,0 +1,59 @@
+body{
+    background:url(img/background_psicodelico.gif);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+    gap: 2em;
+    padding: 2rem;
+    background-color: rgba(172, 34, 232, 0.535);
+    margin: 3rem;
+    border-radius: 2em;
+    border-style: dashed;
+}
+input{
+    display: flex;
+    border-radius: 10px;
+    padding: 0.8em 1em;
+    width: 40em;
+    border: none;
+    background-color:rgba(255, 255, 255, 0.664); 
+}
+input:focus{
+    background-color: white;
+}
+label{
+    font-size: large;
+}
+button{
+    border-radius: 1em;
+    border: dashed;
+    padding: 0.6em 5em;
+    background-color: rgba(255, 253, 149, 0.644);
+    -webkit-filter: drop-shadow(10px 5px 5px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(10px 5px 5px rgba(0, 0, 0, 0.3));
+    margin: 1em;
+    font-weight: bold;
+}
+button:hover{
+    background-color: rgba(255, 253, 149, 0.747);
+}
+h1{
+    font-size: xx-large;
+}
+.linha{
+    display: flex;
+    margin: 0em 2em;
+    gap: 2em;
+}
+.linha input{
+    width: 18em;
+}
+
+.linha label{
+
+}
