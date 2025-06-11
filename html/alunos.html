@@ -3,14 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <title>Alunos</title>
-  <link rel="stylesheet" href="alunos.css">
+  <link rel="stylesheet" href="style_model.css">
 </head>
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+
+
+
+.alunos-section {
+  padding: 30px;
+  text-align: center;
+}
+
+.icon {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.alunos-section h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.search {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.search select {
+  padding: 8px;
+  font-size: 16px;
+  min-width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.card {
+  margin: 0 auto;
+  max-width: 400px;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px #ddd;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 15px 0 5px;
+  font-size: 22px;
+}
+
+.card p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.card strong {
+  color: #333;
+}
+
+</style>
 <body>
+  <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="img/casa-simples-fina.png"/></div>
+  </header>
+
+<main>
+
   <div class="container">
     
 
     <div class="alunos-section">
-      <img src="img/grupo.png" alt="Alunos" class="icon">
+      <img src="../img/grupo.png" alt="Alunos" class="icon">
       <h2>ALUNOS</h2>
 
       <div class="search">
@@ -23,14 +120,18 @@
       </div>
 
       <div id="studentCard" class="card">
-        <img id="studentImage" src="img/icon_pessoa.png" alt="Foto do aluno">
+        <img id="studentImage" src="../img/icon_pessoa.png" alt="Foto do aluno">
         <h3 id="studentName"></h3>
         <p><strong>EMAIL:</strong> <span id="studentEmail"></span></p>
         <p><strong>CONTATO:</strong> <span id="studentContact"></span></p>
       </div>
     </div>
   </div>
+</main>
 
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
   <script src="alunos.js"></script>
 </body>
 </html>
