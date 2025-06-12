@@ -4,21 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Horário</title>
-  <link rel="stylesheet" href="/horario.css" />
-  <style>* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+  <link rel="stylesheet" href="style_model.css">
+  <style>
 
 .container {
   width: 320px;
@@ -104,9 +91,14 @@ form.aulas input {
 }
 </style>
 </head>
+ <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png" onclick="window.location='menu.html'"/></div>
+  </header>
 <body>
+  <main>
   <div class="container">
-    <img src="/img/schedule_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" alt="Relógio" class="icon" />
+    <img src="../img/schedule_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" alt="Relógio" class="icon" />
     <h3>HORÁRIO</h3>
 
     <div class="dias">
@@ -133,5 +125,10 @@ form.aulas input {
   </div>
 
   <script src="/horario.js"></script>
+  </main>
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
 </body>
 </html>
