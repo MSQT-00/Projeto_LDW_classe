@@ -68,6 +68,7 @@ header .home-button {
 
 header .home-button:hover{
   cursor: pointer;
+  background-color: #700101 ;
 }
 
 .img_icon_home {
