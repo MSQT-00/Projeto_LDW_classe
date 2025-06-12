@@ -4,18 +4,117 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meu Perfil</title>
-  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="style_model.css" />
 </head>
+<style>
+  .perfil-header {
+  background-color: #2e2e2e;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.perfil-section {
+  text-align: center;
+  padding: 30px;
+}
+
+.perfil-icon {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.perfil-section h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.perfil-card {
+  background: #f7f7f7;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.perfil-foto {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.perfil-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.perfil-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #0aaf0a;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: #2e2e2e;
+  text-align: center;
+  padding: 10px;
+}
+
+.exit-btn {
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+</style>
 <body>
+    <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" onClick= "window.location='menu.html'" src="../img/casa-simples-fina.png"/></div>
+  </header>
+<main>
   <div class="container">
 
 
     <section class="perfil-section">
-      <img src="img/icon_pessoa.png" alt="Meu Perfil" class="perfil-icon"/>
+      <img src="../img/icon_pessoa.png" alt="Meu Perfil" class="perfil-icon"/>
       <h2>MEU PERFIL</h2>
 
       <div class="perfil-card">
-        <img src="img/peterparkerfoto.webp" alt="Foto do usuário" class="perfil-foto"/>
+        <img src="../img/peterparkerfoto.webp" alt="Foto do usuário" class="perfil-foto"/>
 
         <div class="perfil-info">
           <p><strong>NOME:</strong> PETER PARKER</p>
@@ -26,11 +125,17 @@
         </div>
 
         <div class="perfil-actions">
-          <button class="edit-btn"><img src="img/editicon.png" alt="Editar" /></button>
+          <button class="edit-btn"><img src="../img/editicon.png" alt="Editar" /></button>
           <button class="save-btn">GRAVAR</button>
         </div>
       </div>
     </section>
   </div>
+  </main>
+
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
 </body>
 </html>
