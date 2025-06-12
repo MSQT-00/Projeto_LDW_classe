@@ -66,6 +66,10 @@ header .home-button {
   cursor: pointer;
 }
 
+header .home-button:hover{
+  cursor: pointer;
+}
+
 .img_icon_home {
   width: 25px;
   height: 25px;
