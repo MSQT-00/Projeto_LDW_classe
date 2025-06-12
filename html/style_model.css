@@ -78,7 +78,10 @@ footer .exit-button {
   border-radius: 5px;
   cursor: pointer;
 }
+footer .exit-button:hover {
+  background-color: #700101 ;
 
+}
 
 
 /* MODELO DE RODAPÉ PARA FUNCIONALIDADES FIXAS DA TELA (BOTÕES E ETC) */
