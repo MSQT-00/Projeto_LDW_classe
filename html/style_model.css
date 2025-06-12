@@ -63,6 +63,7 @@ header .home-button {
   align-items: center;
   font-weight: bold;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .img_icon_home {
