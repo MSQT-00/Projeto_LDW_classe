@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequência</title>
+  <link rel="stylesheet" href="style_model.css">
+</head>
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+
+    .datas {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    img {
+      max-width: 100px;
+    }
+    .container-datas {
+    display: flex;
+    align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 26px;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+</style>
+<body>
+  <header>
+      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
+      <a href="menu.html">
+        <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
+      </a>
+  </header>
+  <main>
+    <img src="../img/icone_checklist.jfif">
+
+    <h1>Frequência Global</h1>
+
+    <p>Hoje: <span id="dataAtual"></span></p>
+
+    <script>
+  const hoje = new Date();
+
+  const dataFormatada = hoje.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
+  document.getElementById('dataAtual').textContent = dataFormatada;
+</script>
+
+<div class="faltas">
+  <p>Faltas: <span id="porcentagem">0%</span></p>
+</div>
+
+<p>
+ <img src="../img/icone_calendario.png" alt="Ícone" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;">
+  Datas com Faltas:
+</p>
+ 
+<div class="datas">
+
+
+  <div class="container-datas">
+    <ol id="datas-ul"></ol>
+  </div>
+</div>
+
+
+<script>
+  // Suponha que essas são as datas que você quer exibir:
+  const datas = [
+    '2025-06-01',
+    '2025-05-31',
+    '2025-05-05',
+    '2025-04-16',
+    '2025-03-02'
+  ];
+
+  const lista = document.getElementById('datas-ul');
+
+  datas.forEach(dataStr => {
+    const dataObj = new Date(dataStr);
+    const dataFormatada = dataObj.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    const item = document.createElement('li');
+    item.textContent = dataFormatada;
+    lista.appendChild(item);
+  });
+</script>
+
+</main>
+
+
+ 
+
+
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurações</title>
+  <link rel="stylesheet" href="style_model.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+</head>
+<style>
+  .settings-section {
+  padding: 30px;
+  text-align: center;
+}
+
+.settings-section .icon {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.settings-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.settings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.settings-list li {
+  font-size: 18px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.settings-list i {
+  font-size: 20px;
+  color: #333;
+}
+
+footer {
+  background-color: #2e2e2e;
+  padding: 15px;
+  text-align: center;
+}
+
+.logout-btn {
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+.icon-area img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer; 
+}
+
+</style>
+<body>
+
+    <header>
+      <div class="welcome">BEM VINDO, <strong id="nomeUsuario"> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" onClick= "window.location='menu.html'" src="../img/casa-simples-fina.png"/></div>
+  </header>
+
+<main>
+  <div class="container">
+    
+
+    <section class="settings-section">
+      <img src="../img/gear.png" alt="Configurações" class="icon" />
+      <h2>CONFIGURAÇÕES</h2>
+
+    <ul class="settings-list">
+  <li>
+    <span class="icon-area"><img src="../img/downloadicon.webp" alt="Download" /></span>
+    <span class="text-area">DOWNLOAD DO DIÁRIO</span>
+  </li>
+  <li>
+    <span class="icon-area"><img src="../img/password_icon.png" alt="Alterar Senha" /></span>
+    <span class="text-area">ALTERAR SENHA</span>
+  </li>
+  <li>
+    <span class="icon-area"><img src="../img/restart-icon-9.png" alt="Resetar Informações" /></span>
+    <span class="text-area">RESETAR INFORMAÇÕES</span>
+  </li>
+</ul>
+
+  </main>
+
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
+  </div>
+</body>
+
+<script type="module">
+  import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+      const token = sessionStorage.getItem("token");
+
+      if (token && nomeUsuarioSpan) {
+        try {
+          // Decodificar o token para obter o payload
+          const payloadBase64 = token.split(".")[1];
+          const decodedPayload = atob(payloadBase64);
+          const payload = JSON.parse(decodedPayload);
+          console.log("Payload decodificado:", payload);
+
+          // Verificar se o nome está presente no payload
+          if (payload.nome) {
+            nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome).toString();
+          } else {
+            console.warn("Nome do usuário não encontrado no payload do token.");
+            nomeUsuarioSpan.textContent = "USUÁRIO"; // Fallback
+          }
+        } catch (error) {
+          console.error("Erro ao decodificar o token ou extrair nome:", error);
+          nomeUsuarioSpan.textContent = "ERRO"; // Fallback em caso de erro na decodificação
+          // Opcional: alert("Token inválido. Faça login novamente.");
+          // window.location.href = "tela_login.html";
+        }
+      } else if (nomeUsuarioSpan) {
+        console.warn("Token JWT não encontrado no sessionStorage.");
+        nomeUsuarioSpan.textContent = "CONVIDADO"; // Fallback se não houver token
+        // Opcional: alert("Usuário não autenticado. Redirecionando para login.");
+        // window.location.href = "tela_login.html";
+      }
+    });
+</script>
+
+</html>

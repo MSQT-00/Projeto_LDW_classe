@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de gerenciamento acadêmico">
+  <title>Login - Sistema Acadêmico</title>
+  <link rel="stylesheet" href="./../src/css/main.css">
+</head>
+<body>
+  <main class="login-page">
+    <div class="container text-center">
+      <div class="logo-container mb-4">
+        <img src="/src/assets/images/logo_CentroPaulaSouza.png" alt="Centro Paula Souza" class="mb-2">
+        <img src="/src/assets/images/fatec_ra_metropolitana_sp_maua_cor.png" alt="FATEC" class="mb-2">
+      </div>
+
+      <h1 class="mb-4">AGENDA DO ALUNO</h1>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="login">Login: *</label>
+          <input type="text" id="login" name="login" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha: *</label>
+          <input type="password" id="senha" name="senha" required>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn">Entrar</button>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-secondary" onclick="handleForgotPassword()">Esqueci a senha</button>
+        </div>
+
+        <div class="form-group">
+          <a href="cadastro.html" class="btn btn-secondary">Cadastrar</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script type="module">
+    import { handleLogin } from './../src/js/modules/auth.js';
+  
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const login = document.getElementById('login').value;
+      const senha = document.getElementById('senha').value;
+      
+      try {
+        await handleLogin(login, senha);
+        // Redireciona após login bem-sucedido
+        window.location.href = '/front/html/menu.html'; // ajuste o caminho conforme seu projeto
+      } catch (error) {
+        alert('Erro ao fazer login: ' + error.message);
+      }
+    });
+  </script>
+  
+</body>
+</html>
