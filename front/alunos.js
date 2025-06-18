@@ -3,19 +3,22 @@ const students = {
     name: "NED LEEDS",
     email: "NED@XTEC.SP.GOV.BR",
     contact: "11 99876-5432",
-    image: "img/needfoto.jpeg"
+    image: "/img/needfoto.jpeg"
   },
   mj: {
     name: "MICHELLE JONES",
     email: "MJ@XTEC.SP.GOV.BR",
     contact: "11 91234-5678",
-    image: "img/mjfoto.jpeg"
+    image: "/img/mjfoto.jpeg"
   },
   peter: {
     name: "PETER PARKER",
     email: "PETER@XTEC.SP.GOV.BR",
     contact: "11 90000-0000",
-    image: "img/peterparkerfoto.webp"
+    image: "/img/peterparkerfoto.webp"
+  },
+  selecione:{
+    image: "/img/grupo.png"
   }
 };
 

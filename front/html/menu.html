@@ -4,18 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu de opções</title>
+    <link rel="stylesheet" href="style_model.css">
   </head>
    <style>
         .card {
             display: flex;
             flex-direction: column;
             background-color: rgb(229, 229, 229);
-            padding: 1em;
-            margin: 2em;
+            padding: 5px;
+            margin: 5px;
             align-items: center;
         }
         .card img{
-            max-width: 30%;
+            max-width: 100%;
         }
         .card p{
             color: rgb(66, 66, 66);
@@ -27,8 +28,6 @@
         .container{
             display: grid;
             grid-template-columns:50% 50% ;
-            padding: 2em;
-            max-width: 1200px;
 
         }
         .alinha-fim{
@@ -42,49 +41,121 @@
           display: flex;
           justify-content: center;
         }
+        a{
+          text-decoration: none;
+        }
+        a:hover{
+          text-decoration: underline;
+          color: gray
+        }
 
     </style>
 
   <body>  
+     <header>
+      <div class="welcome">BEM VINDO, <strong id="nomeUsuario"> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
+  </header>
+
     <main>
       <div class="container">
-        <div class="card">
-          <img src="img/calendario.png " />
-          </span>
-          <p>CALENDÁRIO</p>
-        </div>
-        <div class="card">
-          <img src="img/relogio.png " />
-          <p>HORÁRIO</p>
-        </div>
-        <div class="card">
-          <img src="img/professor-no-quadro.png " />
-          <p>PROFESSORES</p>
-        </div>
-        <div class="card">
-          <img src="img/alunos.png " />
-          <p>ALUNOS</p>
-        </div>
-        <div class="card">
-          <img src="img/select_95365.png " />
-          <p>FREQUÊNCIA</p>
-        </div>
-        <div class="card">
-          <img src="img/anotacao.png " />
-          <p>NOTAS</p>
-        </div>
-        <div class="card">
-          <img src="img/anotacao.webp " />
-          <p>ANOTAÇÕES</p>
-        </div>
-        <div class="card">
-          <img src="img/perfil.png " />
-          <p>MEU PERFIL</p>
-        </div>
+        <a href="calendario.html">
+          <div class="card">
+            <img src="../img/calendario.png " />
+            </span>
+            <p>CALENDÁRIO</p>
+          </div>
+        </a>
+        <a href="horario.html">
+          <div class="card">
+            <img src="../img/relogio.png " />
+            <p>HORÁRIO</p>
+          </div>
+        </a>
+        <a href="professores.html">
+          <div class="card">
+            <img src="../img/professor-no-quadro.png " />
+            <p>PROFESSORES</p>
+          </div>
+        </a>
+        <a href="alunos.html">
+          <div class="card">
+            <img src="../img/alunos.png " />
+            <p>ALUNOS</p>
+          </div>
+        </a>
+        <a href="tela_frequencia.html">
+          <div class="card">
+            <img src="../img/select_95365.png " />
+            <p>FREQUÊNCIA</p>
+          </div>
+        </a>
+        <a href="notas.html">
+          <div class="card">
+            <img src="../img/anotacao.png " />
+            <p>NOTAS</p>
+          </div>
+        </a>
+        <a href="anotacoes.html">
+          <div class="card">
+            <img src="../img/anotacao.webp " />
+            <p>ANOTAÇÕES</p>
+          </div>
+        </a>
+        <a href="profile.html">
+          <div class="card">
+            <img src="../img/perfil.png " />
+            <p>MEU PERFIL</p>
+          </div>
+        </a>
       </div>
       <div class="alinha-fim">
-        <img src="img/settings.png">
+        <a href="config.html">
+          <img src="../img/settings.png">
+        </a>
       </div>
     </main>
+    
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
   </body>
+
+  <script type="module">
+    import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+        const token = sessionStorage.getItem("token");
+
+        if (token && nomeUsuarioSpan) {
+          try {
+            // Decodificar o token para obter o payload
+            const payloadBase64 = token.split(".")[1];
+            const decodedPayload = atob(payloadBase64);
+            const payload = JSON.parse(decodedPayload);
+            console.log("Payload decodificado:", payload);
+
+            // Verificar se o nome está presente no payload
+            if (payload.nome) {
+              nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome).toString();
+            } else {
+              console.warn("Nome do usuário não encontrado no payload do token.");
+              nomeUsuarioSpan.textContent = "USUÁRIO"; // Fallback
+            }
+          } catch (error) {
+            console.error("Erro ao decodificar o token ou extrair nome:", error);
+            nomeUsuarioSpan.textContent = "ERRO"; // Fallback em caso de erro na decodificação
+            // Opcional: alert("Token inválido. Faça login novamente.");
+            // window.location.href = "tela_login.html";
+          }
+        } else if (nomeUsuarioSpan) {
+          console.warn("Token JWT não encontrado no sessionStorage.");
+          nomeUsuarioSpan.textContent = "CONVIDADO"; // Fallback se não houver token
+          // Opcional: alert("Usuário não autenticado. Redirecionando para login.");
+          // window.location.href = "tela_login.html";
+        }
+      });
+  </script>
+  
 </html>

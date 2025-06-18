@@ -4,11 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Horário</title>
-  <link rel="stylesheet" href="/horario.css" />
+  <link rel="stylesheet" href="style_model.css">
+  <style>
+
+.container {
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+}
+
+.icon {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.dias {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dia {
+  flex: 1;
+  margin: 0 3px;
+  padding: 8px 0;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dia.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+form.aulas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+form.aulas label {
+  text-align: left;
+  font-size: 14px;
+}
+
+form.aulas input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.save {
+  background-color: #00c000;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+</style>
 </head>
+ <header>
+      <div class="welcome">BEM VINDO, <strong id="nomeUsuario"> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png" onclick="window.location='menu.html'"/></div>
+  </header>
 <body>
+  <main>
   <div class="container">
-    <img src="/img/schedule_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" alt="Relógio" class="icon" />
+    <img src="../img/schedule_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" alt="Relógio" class="icon" />
     <h3>HORÁRIO</h3>
 
     <div class="dias">
@@ -34,6 +124,49 @@
     </div>
   </div>
 
-  <script src="/horario.js"></script>
+  <script src="../horarios.js"></script>
+  </main>
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
 </body>
+
+<script type="module">
+  import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+      const token = sessionStorage.getItem("token");
+
+      if (token && nomeUsuarioSpan) {
+        try {
+          // Decodificar o token para obter o payload
+          const payloadBase64 = token.split(".")[1];
+          const decodedPayload = atob(payloadBase64);
+          const payload = JSON.parse(decodedPayload);
+          console.log("Payload decodificado:", payload);
+
+          // Verificar se o nome está presente no payload
+          if (payload.nome) {
+            nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome).toString();
+          } else {
+            console.warn("Nome do usuário não encontrado no payload do token.");
+            nomeUsuarioSpan.textContent = "USUÁRIO"; // Fallback
+          }
+        } catch (error) {
+          console.error("Erro ao decodificar o token ou extrair nome:", error);
+          nomeUsuarioSpan.textContent = "ERRO"; // Fallback em caso de erro na decodificação
+          // Opcional: alert("Token inválido. Faça login novamente.");
+          // window.location.href = "tela_login.html";
+        }
+      } else if (nomeUsuarioSpan) {
+        console.warn("Token JWT não encontrado no sessionStorage.");
+        nomeUsuarioSpan.textContent = "CONVIDADO"; // Fallback se não houver token
+        // Opcional: alert("Usuário não autenticado. Redirecionando para login.");
+        // window.location.href = "tela_login.html";
+      }
+    });
+</script>
+
 </html>

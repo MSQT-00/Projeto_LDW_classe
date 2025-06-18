@@ -1,165 +1,495 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anotações</title>
-  <link rel="stylesheet" href="style_model.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</head>
-<style>
-  .note-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  background: #f2f2f2;
-  border-radius: 5px;
-  padding: 5px 10px;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anotações</title>
+    <link rel="stylesheet" href="style_model.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <style>
+    /* Seus estilos CSS existentes */
+    .note-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      background: #f2f2f2;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
 
-.icon {
-  width: 60px;         
-  height: auto;        
-  display: block;
-  margin: 0 auto 10px; 
-}
+    .icon {
+      width: 60px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
 
+    .note-list input[type="text"] {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      padding: 5px;
+      outline: none;
+    }
 
-.note-list input[type="text"] {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  padding: 5px;
-  outline: none;
-}
+    /* Área de ícones */
+    .icon-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* Área de ícones */
-.icon-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
 
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
+    .icon-btn img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
 
-.icon-btn img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
+    /* Efeito ao passar o mouse */
+    .icon-btn:hover img {
+      transform: scale(1.1);
+    }
 
-/* Efeito ao passar o mouse */
-.icon-btn:hover img {
-  transform: scale(1.1);
-}
+    /* Botão de adicionar anotação */
+    .add-note-btn {
+      background: none;
+      border: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 10px 0;
+      cursor: pointer;
+    }
 
-/* Botão de adicionar anotação */
-.add-note-btn {
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px 0;
-  cursor: pointer;
-}
+    .add-note-btn i {
+      margin-right: 5px;
+    }
 
-.add-note-btn i {
-  margin-right: 5px;
-}
+    /* Campo de anotação */
+    textarea {
+      width: 100%;
+      height: 80px;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      resize: none;
+      margin-top: 10px;
+      display: none; /* Escondido por padrão */
+    }
 
-/* Campo de anotação */
-textarea {
-  width: 100%;
-  height: 80px;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  resize: none;
-  margin-top: 10px;
-}
+    /* Botões inferiores */
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
 
-/* Botões inferiores */
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
+    .save-btn {
+      background-color: #009933;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      display: none; /* Escondido por padrão */
+    }
 
-.save-btn {
-  background-color: #009933;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  font-weight: bold;
-  border-radius: 20px;
-  cursor: pointer;
-}
+    .exit-btn {
+      background-color: #b30000;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <header>
+      <div class="welcome">BEM VINDO, <strong id="nomeUsuario"> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" onClick="window.location='menu.html'" src="../img/casa-simples-fina.png"/></div>
+    </header>
 
-.exit-btn {
-  background-color: #b30000;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  font-weight: bold;
-  border-radius: 20px;
-  cursor: pointer;
-}
-</style>
-<body>
-   <header>
-      <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
-      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
-  </header>
+    <main>
+      <div class="container">
+        <section class="anotacoes-section">
+          <img src="../img/anotacoes.png" alt="Anotações" class="icon" />
+          <h2>ANOTAÇÕES</h2>
 
-<main>
-  <div class="container">
-   
+          <ul class="note-list" id="noteList">
+            </ul>
 
-    <section class="anotacoes-section">
-      <img src="../img/anotacoes.png" alt="Anotações" class="icon"/>
-      <h2>ANOTAÇÕES</h2>
+          <button class="add-note-btn" id="addNoteBtn">
+            <i class="fas fa-plus-circle"></i> ADICIONAR ANOTAÇÃO
+          </button>
 
-      <ul class="note-list">
-  <li>
-    <input type="text" value="01/06/22 - 1" />
-    <div class="icon-group">
-      <button class="icon-btn"><img src="../img/lapis.png" alt="Editar" /></button>
-      <button class="icon-btn"><img src="../img/lixo.png" alt="Excluir" /></button>
-    </div>
-  </li>
-  <li>
-    <input type="text" value="02/06/22 - 2" />
-    <div class="icon-group">
-      <button class="icon-btn"><img src="../img/lapis.png" alt="Editar" /></button>
-      <button class="icon-btn"><img src="../img/lixo.png" alt="Excluir" /></button>
-    </div>
-  </li>
-</ul>
-      <button class="add-note-btn"><i class="fas fa-plus-circle"></i> ADICIONAR ANOTAÇÃO</button>
+          <textarea id="newNoteTextarea" placeholder="Digite uma nova anotação..."></textarea>
 
-      <textarea placeholder="Digite uma nova anotação..."></textarea>
-
-      <div class="button-group">
-        <button class="save-btn">GRAVAR</button>
-       
+          <div class="button-group">
+            <button class="save-btn" id="saveNewNoteBtn">GRAVAR</button>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-  </main>
+    </main>
 
-<footer>
-      <button class="exit-button">SAIR</button>
-</footer>
+    <footer>
+      <button class="exit-button" id="exitButton">SAIR</button>
+    </footer>
 
-</body>
+    <script type="module">
+      import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js'; // Ajuste o caminho se necessário
+
+      const API_URL = 'https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/anotacoes'; // URL da sua API
+
+      let userId = null; // Para armazenar o id_aluno do token
+
+      // --- Funções de Manipulação da API ---
+
+      async function getTokenAndUserId() {
+        const token = sessionStorage.getItem("token");
+        if (!token) {
+          console.warn("Token JWT não encontrado. Redirecionando para login.");
+          alert("Sua sessão expirou ou você não está logado. Faça login novamente.");
+          window.location.href = "tela_login.html"; // Ajuste para sua página de login
+          return null;
+        }
+
+        try {
+          const payloadBase64 = token.split(".")[1];
+          const decodedPayload = atob(payloadBase64);
+          const payload = JSON.parse(decodedPayload);
+          
+          // Move this part to DOMContentLoaded to ensure nomeUsuarioSpan exists
+          // if (payload.nome) {
+          //   nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome);
+          // } else {
+          //   nomeUsuarioSpan.textContent = "USUÁRIO";
+          // }
+
+          if (payload.idAluno) { // Assumindo que o ID do aluno está em 'idAluno' no payload
+            userId = payload.idAluno;
+            return token;
+          } else {
+            console.error("ID do aluno não encontrado no payload do token.");
+            alert("Erro ao obter informações do usuário. Faça login novamente.");
+            window.location.href = "tela_login.html";
+            return null;
+          }
+        } catch (error) {
+          console.error("Erro ao decodificar o token ou extrair ID do aluno:", error);
+          alert("Token de autenticação inválido ou expirado. Faça login novamente.");
+          window.location.href = "tela_login.html";
+          return null;
+        }
+      }
+
+      async function fetchAnnotations() {
+        const token = await getTokenAndUserId();
+        if (!token) return;
+
+        try {
+          const response = await fetch(API_URL, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+              alert("Sessão expirada ou não autorizada. Faça login novamente.");
+              window.location.href = "tela_login.html";
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const annotations = await response.json();
+          renderAnnotations(annotations);
+        } catch (error) {
+          console.error('Erro ao buscar anotações:', error);
+          alert('Erro ao carregar anotações. Verifique o console.');
+        }
+      }
+
+      async function addAnnotation(noteContent) {
+        const token = await getTokenAndUserId();
+        if (!token || !userId) return;
+
+        try {
+          const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              id_aluno: userId,
+              data_anotacao: today,
+              anotacao: noteContent
+            })
+          });
+
+          if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+              alert("Sessão expirada ou não autorizada. Faça login novamente.");
+              window.location.href = "tela_login.html";
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          await response.json(); // Pega a anotação criada
+          newNoteTextarea.value = ''; // Limpa o textarea
+          newNoteTextarea.style.display = 'none'; // Esconde textarea
+          saveNewNoteBtn.style.display = 'none'; // Esconde botão salvar
+          addNoteBtn.style.display = 'inline-block'; // Mostra botão adicionar
+          fetchAnnotations(); // Recarrega a lista
+        } catch (error) {
+          console.error('Erro ao adicionar anotação:', error);
+          alert('Erro ao adicionar anotação. Verifique o console.');
+        }
+      }
+
+      async function updateAnnotation(id, newContent) {
+        const token = await getTokenAndUserId();
+        if (!token) return;
+
+        try {
+          const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ anotacao: newContent }) // Envia apenas o que será atualizado
+          });
+
+          if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+              alert("Sessão expirada ou não autorizada. Faça login novamente.");
+              window.location.href = "tela_login.html";
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          await response.json();
+          alert('Anotação atualizada com sucesso!');
+          // Não precisa recarregar tudo se a edição foi na linha
+        } catch (error) {
+          console.error('Erro ao atualizar anotação:', error);
+          alert('Erro ao atualizar anotação. Verifique o console.');
+        }
+      }
+
+      async function deleteAnnotation(id) {
+        // ADICIONE ESTA LINHA:
+        console.log("Tentando excluir anotação com ID:", id);
+
+        if (!confirm('Tem certeza que deseja excluir esta anotação?')) {
+          return;
+        }
+
+        const token = await getTokenAndUserId();
+        if (!token) return;
+
+        try {
+          const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+              alert("Sessão expirada ou não autorizada. Faça login novamente.");
+              window.location.href = "tela_login.html";
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          await response.json();
+          alert('Anotação excluída com sucesso!');
+          fetchAnnotations(); // Recarrega a lista após exclusão
+        } catch (error) {
+          console.error('Erro ao excluir anotação:', error);
+          alert('Erro ao excluir anotação. Verifique o console.');
+        }
+      }
+
+      // --- Funções de Renderização e Eventos ---
+
+      function formatDate(dateString) {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const date = new Date(dateString);
+        // Garante que a data seja interpretada em UTC para evitar problemas de fuso horário
+        // se a string do banco não incluir informações de fuso
+        const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        return utcDate.toLocaleDateString('pt-BR', options);
+      }
+
+      function renderAnnotations(annotations) {
+        noteList.innerHTML = ''; // Limpa a lista atual
+
+        // Filtra as anotações para exibir apenas as do usuário logado
+        const userAnnotations = annotations.filter(note => note.id_aluno === userId);
+
+        if (userAnnotations.length === 0) {
+          const li = document.createElement('li');
+          li.textContent = "Nenhuma anotação encontrada.";
+          li.style.justifyContent = "center";
+          li.style.fontStyle = "italic";
+          noteList.appendChild(li);
+          return;
+        }
+
+        userAnnotations.forEach(note => {
+          const li = document.createElement('li');
+          li.dataset.id = note.id_anotacao; // Armazena o ID da anotação
+
+          const date = formatDate(note.data_anotacao);
+          const noteText = note.anotacao;
+
+          const inputField = document.createElement('input');
+          inputField.type = 'text';
+          inputField.value = `${date} - ${noteText}`;
+          inputField.readOnly = true; // Começa como somente leitura
+          inputField.classList.add('note-input'); // Adicione uma classe para estilização ou seleção
+
+          // Event listener para quando o campo perde o foco (depois de editar)
+          inputField.addEventListener('blur', async () => {
+            if (!inputField.readOnly) { // Se estava em modo de edição
+              const newValue = inputField.value;
+              // Regex para extrair a data e o texto. Captura a parte da data e o restante como texto.
+              const match = newValue.match(/^(\d{2}\/\d{2}\/\d{4}) - (.*)$/);
+              let newNoteContent = newValue; // Assume o valor completo se o formato não corresponder
+              if (match && match[2]) {
+                  newNoteContent = match[2].trim(); // Pega apenas a parte da anotação
+              }
+
+              await updateAnnotation(note.id_anotacao, newNoteContent);
+              inputField.readOnly = true; // Volta para somente leitura
+              inputField.style.border = 'none'; // Remove a borda de edição
+              // Opcional: Re-renderizar o texto no formato "DD/MM/YYYY - Novo Texto" caso o usuário tenha apagado a data
+              inputField.value = `${date} - ${newNoteContent}`;
+            }
+          });
+
+          // Event listener para permitir edição ao pressionar Enter
+          inputField.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter' && !inputField.readOnly) {
+              inputField.blur(); // Simula a perda de foco para salvar
+            }
+          });
+
+          const iconGroup = document.createElement('div');
+          iconGroup.classList.add('icon-group');
+
+          const editBtn = document.createElement('button');
+          editBtn.classList.add('icon-btn');
+          editBtn.innerHTML = '<img src="../img/lapis.png" alt="Editar" />';
+          editBtn.addEventListener('click', () => {
+            inputField.readOnly = false; // Torna o campo editável
+            inputField.focus(); // Coloca o foco no campo
+            // Coloca o cursor após a data (13 caracteres para "DD/MM/YYYY - ")
+            inputField.setSelectionRange(inputField.value.indexOf('-') + 2, inputField.value.length);
+            inputField.style.border = '1px solid #007bff'; // Adiciona uma borda para indicar edição
+          });
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.classList.add('icon-btn');
+          deleteBtn.innerHTML = '<img src="../img/lixo.png" alt="Excluir" />';
+          deleteBtn.addEventListener('click', () => {
+            deleteAnnotation(note.id_anotacao);
+          });
+
+          iconGroup.appendChild(editBtn);
+          iconGroup.appendChild(deleteBtn);
+
+          li.appendChild(inputField);
+          li.appendChild(iconGroup);
+          noteList.appendChild(li);
+        });
+      }
+
+      // --- Event Listeners Globais ---
+
+      // Ao carregar a página
+      document.addEventListener("DOMContentLoaded", async () => {
+        // Seleção dos elementos DOM moveu para dentro deste bloco
+        const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+        const noteList = document.getElementById("noteList");
+        const addNoteBtn = document.getElementById("addNoteBtn");
+        const newNoteTextarea = document.getElementById("newNoteTextarea");
+        const saveNewNoteBtn = document.getElementById("saveNewNoteBtn");
+        const exitButton = document.getElementById("exitButton"); // AGORA exitButton será encontrado!
+
+
+        // Lógica para preencher o nome do usuário no header
+        const token = sessionStorage.getItem("token");
+        if (token && nomeUsuarioSpan) {
+            try {
+                const payloadBase64 = token.split(".")[1];
+                const decodedPayload = atob(payloadBase64);
+                const payload = JSON.parse(decodedPayload);
+                if (payload.nome) {
+                    nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome);
+                } else {
+                    console.warn("Nome do usuário não encontrado no payload do token.");
+                    nomeUsuarioSpan.textContent = "USUÁRIO";
+                }
+            } catch (error) {
+                console.error("Erro ao decodificar o token para o header:", error);
+                nomeUsuarioSpan.textContent = "ERRO";
+            }
+        } else if (nomeUsuarioSpan) {
+            console.warn("Token JWT não encontrado no sessionStorage para o header.");
+            nomeUsuarioSpan.textContent = "CONVIDADO";
+        }
+        
+        await getTokenAndUserId(); // Carrega o id_aluno e faz outras verificações de token
+        fetchAnnotations(); // Carrega as anotações
+
+
+        // Botão "ADICIONAR ANOTAÇÃO"
+        addNoteBtn.addEventListener('click', () => {
+          newNoteTextarea.style.display = 'block'; // Mostra o textarea
+          saveNewNoteBtn.style.display = 'block'; // Mostra o botão gravar
+          addNoteBtn.style.display = 'none'; // Esconde o botão adicionar
+          newNoteTextarea.focus(); // Coloca o foco no textarea
+        });
+
+        // Botão "GRAVAR" (para novas anotações)
+        saveNewNoteBtn.addEventListener('click', () => {
+          const content = newNoteTextarea.value.trim();
+          if (content) {
+            addAnnotation(content);
+          } else {
+            alert('Por favor, digite sua anotação antes de gravar.');
+          }
+        });
+
+        // Botão "SAIR"
+        exitButton.addEventListener('click', () => {
+          sessionStorage.removeItem('token'); // Remove o token
+          window.location.href = 'tela_login.html'; // Redireciona para a tela de login
+        });
+      });
+    </script>
+  </body>
 </html>

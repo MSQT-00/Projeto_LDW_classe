@@ -11,7 +11,7 @@ exports.listarTodos = async (req, res) => {
     res.json(calendarios);
   } catch (error) {
     console.error('Erro ao listar calendário:', error);
-    res.status(500).json({ mensagem: 'Erro ao listar calendário' });
+    res.status(500).json({ mensagem: 'Erro ao listar calendário' + error });
   }
 };
 

@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');const sequelize = require('../config/database');
+const { login } = require('../controller/authController');
 const Aluno = sequelize.define('Aluno', {
   id_aluno: {
     type: DataTypes.INTEGER,
@@ -6,6 +7,7 @@ const Aluno = sequelize.define('Aluno', {
     autoIncrement: true,
   },
   ra: DataTypes.STRING(200),
+  login: DataTypes.STRING(100),
   nome: DataTypes.STRING(100),
   email: DataTypes.STRING(100),
   instituicao: DataTypes.STRING(100),

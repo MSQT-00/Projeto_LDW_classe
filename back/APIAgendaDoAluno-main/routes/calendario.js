@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/calendarioController');
+const controller = require('../controller/calendarioController');
 
 router.get('/', controller.listarTodos);          // GET /api/calendario
 router.get('/:id', controller.buscarPorId);       // GET /api/calendario/5

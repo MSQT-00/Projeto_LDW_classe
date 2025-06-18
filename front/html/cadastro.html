@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style_model.css" />
+  </head>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      background-color: #2d3e50;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header .welcome {
+      font-weight: bold;
+    }
+    .header .home-button {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      flex-grow: 1;
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .login-section {
+      background-color: #eee;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+    }
+    .button-submit {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: #2d3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .footer {
+      background-color: #2d3e50;
+      padding: 10px;
+      text-align: right;
+    }
+    .exit-button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <header></header>
+
+    <main>
+      <div class="container">
+        <h2>CADASTRO</h2>
+        <form id="cadastroForm">
+          <label for="nome">NOME: *</label>
+          <input type="text" id="nome" required />
+
+          <label for="email">EMAIL: *</label>
+          <input type="email" id="email" required />
+
+          <label for="ra">RA: *</label>
+          <input type="text" id="ra" required />
+
+          <label for="instituicao">INSTITUIÇÃO: *</label>
+          <input type="text" id="instituicao" required />
+
+          <div class="login-section">
+            <label for="login">LOGIN: *</label>
+            <input type="text" id="login" required />
+
+            <label for="senha">SENHA: *</label>
+            <input type="password" id="senha" required />
+
+            <label for="repetir">REPETIR SENHA: *</label>
+            <input type="password" id="repetir" required />
+          </div>
+
+          <button type="submit" class="button-submit">CADASTRAR</button>
+        </form>
+
+        <div id="mensagem" style="margin-top: 1em; color: red"></div>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <script>
+      const form = document.getElementById("cadastroForm");
+      const mensagemDiv = document.getElementById("mensagem");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        mensagemDiv.style.color = "red";
+        mensagemDiv.textContent = "";
+
+        const nome = form.nome.value.trim();
+        const email = form.email.value.trim();
+        const ra = form.ra.value.trim();
+        const instituicao = form.instituicao.value.trim();
+        const login = form.login.value.trim();
+        const senha = form.senha.value;
+        const repetir = form.repetir.value;
+
+        if (senha !== repetir) {
+          mensagemDiv.textContent = "As senhas não conferem.";
+          return;
+        }
+
+        const dados = {
+          nome,
+          email,
+          ra,
+          instituicao,
+          login,
+          senha,
+        };
+
+        try {
+          const resposta = await fetch(
+            "https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/auth/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dados),
+            }
+          );
+
+          const resultado = await resposta.json();
+
+          if (!resposta.ok) {
+            mensagemDiv.textContent =
+              resultado.mensagem || "Erro ao cadastrar.";
+            return;
+          }
+
+          mensagemDiv.style.color = "green";
+          mensagemDiv.textContent =
+            resultado.mensagem || "Cadastro realizado com sucesso!";
+          form.reset();
+        } catch (erro) {
+          mensagemDiv.textContent = "Erro na comunicação com o servidor.";
+          console.error(erro);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -63,6 +63,12 @@ header .home-button {
   align-items: center;
   font-weight: bold;
   text-decoration: none;
+  cursor: pointer;
+}
+
+header .home-button:hover{
+  cursor: pointer;
+  background-color: #700101 ;
 }
 
 .img_icon_home {
@@ -78,7 +84,10 @@ footer .exit-button {
   border-radius: 5px;
   cursor: pointer;
 }
+footer .exit-button:hover {
+  background-color: #700101 ;
 
+}
 
 
 /* MODELO DE RODAPÉ PARA FUNCIONALIDADES FIXAS DA TELA (BOTÕES E ETC) */
@@ -96,6 +105,3 @@ footer .exit-button {
   border-top: 1px solid #ccc;
   font-size: 14px;
 }
-
-
-

@@ -12,14 +12,6 @@
       margin: 0;
     }
 
-    body {
-      display: flex;
-      align-items: center;        /* centraliza verticalmente */
-      justify-content: center;    /* centraliza horizontalmente */
-      flex-direction: column;     /* para os elementos ficarem empilhados */
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
 
     .datas {
       margin-top: 20px;
@@ -30,9 +22,11 @@
       max-width: 100px;
     }
     .container-datas {
+    display: flex;
+    align-items: center;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
-  padding: 16px;
+  padding: 26px;
   border-radius: 8px;
   max-width: 300px;
   margin: 0 auto;
@@ -43,7 +37,9 @@
 <body>
   <header>
       <div class="welcome">BEM VINDO, <strong> FULANO</strong></div>
-      <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
+      <a href="menu.html">
+        <div class="home-button"><img class="img_icon_home" src="../img/casa-simples-fina.png"/></div>
+      </a>
   </header>
   <main>
     <img src="../img/icone_checklist.jfif">

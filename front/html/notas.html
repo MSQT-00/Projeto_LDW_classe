@@ -4,10 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tela de Notas</title>
-  <link rel="stylesheet" href="/notas.css">
+  <link rel="stylesheet" href="style_model.css">
   
 </head>
+<style>
+  * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+
+
+
+.header .icon {
+  width: 40px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.trimestres {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.tri {
+  flex: 1;
+  margin: 0 3px;
+  padding: 8px 0;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.tri.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th {
+  font-size: 12px;
+  color: #888;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+td {
+  padding: 5px 0;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.save {
+  background-color: #00c000;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+</style>
 <body>
+    <header>
+      <div class="welcome">BEM VINDO, <strong id="nomeUsuario"> FULANO</strong></div>
+      <div class="home-button"><img class="img_icon_home" onClick= "window.location='menu.html'" src="../img/casa-simples-fina.png"/></div>
+  </header>
+
+<main>
+
   <div class="container">
     <div class="header">
       <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Notas" class="icon">
@@ -46,5 +147,49 @@
     </div>
   </div>
   <script src="/notas.js"></script>
+  </main>
+
+<footer>
+      <button class="exit-button">SAIR</button>
+</footer>
+
 </body>
+
+<script type="module">
+  import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+      const token = sessionStorage.getItem("token");
+
+      if (token && nomeUsuarioSpan) {
+        try {
+          // Decodificar o token para obter o payload
+          const payloadBase64 = token.split(".")[1];
+          const decodedPayload = atob(payloadBase64);
+          const payload = JSON.parse(decodedPayload);
+          console.log("Payload decodificado:", payload);
+
+          // Verificar se o nome está presente no payload
+          if (payload.nome) {
+            nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome).toString();
+          } else {
+            console.warn("Nome do usuário não encontrado no payload do token.");
+            nomeUsuarioSpan.textContent = "USUÁRIO"; // Fallback
+          }
+        } catch (error) {
+          console.error("Erro ao decodificar o token ou extrair nome:", error);
+          nomeUsuarioSpan.textContent = "ERRO"; // Fallback em caso de erro na decodificação
+          // Opcional: alert("Token inválido. Faça login novamente.");
+          // window.location.href = "tela_login.html";
+        }
+      } else if (nomeUsuarioSpan) {
+        console.warn("Token JWT não encontrado no sessionStorage.");
+        nomeUsuarioSpan.textContent = "CONVIDADO"; // Fallback se não houver token
+        // Opcional: alert("Usuário não autenticado. Redirecionando para login.");
+        // window.location.href = "tela_login.html";
+      }
+    });
+</script>
+
 </html>

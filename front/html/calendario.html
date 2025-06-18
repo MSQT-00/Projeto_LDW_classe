@@ -1,154 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style_model.css" />
     <title>Calendário Dinâmico</title>
     <style>
-        body {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        .conteiner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 400px;
-            height: 80vh;
-            background-color: white;
-            flex-direction: column;
-            gap: 30px;
-            padding: 20px;
-            box-shadow: 0 0 10px #ccc;
-            border-radius: 10px;
-        }
-        img {
-            width: 70px;
-            height: 70px;
-        }
-        .mes button {
-            background-color: rgba(128, 128, 128, 0.527);
-            border: 0;
-            border-radius: 15px;
-            padding: 4px 10px;
-            margin: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .mes button:hover,
-        .mes button.active {
-            background-color: rgba(128, 128, 128, 0.8);
-            color: white;
-        }
-        .mes {
-            display: grid;
-            grid-template-columns: repeat(6, auto);
-            justify-content: center;
-            gap: 6px;
-            user-select: none;
-        }
-        .calendario {
-            background-color: rgba(128, 128, 128, 0.192);
-            width: 300px;
-            border-radius: 8px;
-            padding-bottom: 10px;
-        }
-        .calendario h2 {
-            background-color: rgba(138, 138, 138, 0.76);
-            margin: 0;
-            padding: 8px 10px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .calendario-box {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            margin: 4px 8px;
-            font-family: Arial, sans-serif;
-        }
-        .semana, .dia {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 35px;
-            font-weight: bold;
-        }
-        .dia {
-            font-weight: normal;
-            cursor: default;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .dia.empty {
-            background-color: transparent;
-            cursor: default;
-        }
-        .dia:hover:not(.empty) {
-            background-color: rgba(128,128,128,0.3);
-        }
-        .legenda {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 20px;
-            font-family: Arial, sans-serif;
-        }
-        .legenda .circulo {
-            width: 15px;
-            height: 15px;
-            background-color: blue;
-            border-radius: 50%;
-        }
-        .legenda div {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin: 8px;
-        }
+      /* Seus estilos CSS personalizados para o calendário */
+      img {
+        width: 70px;
+        height: 70px;
+      }
+      .mes button {
+        background-color: rgba(128, 128, 128, 0.527);
+        border: 0;
+        border-radius: 15px;
+        padding: 4px 10px;
+        margin: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+      .mes button:hover,
+      .mes button.active {
+        background-color: rgba(128, 128, 128, 0.8);
+        color: white;
+      }
+      .mes {
+        display: grid;
+        grid-template-columns: repeat(6, auto);
+        justify-content: center;
+        gap: 6px;
+        user-select: none;
+      }
+      .calendario {
+        background-color: rgba(128, 128, 128, 0.192);
+        width: 300px;
+        border-radius: 8px;
+        padding-bottom: 10px;
+      }
+      .calendario h2 {
+        background-color: rgba(138, 138, 138, 0.76);
+        margin: 0;
+        padding: 8px 10px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .calendario-box {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin: 4px 8px;
+        font-family: Arial, sans-serif;
+      }
+      .semana,
+      .dia {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        font-weight: bold;
+      }
+      .dia {
+        font-weight: normal;
+        cursor: default;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        background-color: transparent; /* Padrão */
+      }
+      .dia.empty {
+        background-color: transparent;
+        cursor: default;
+      }
+      .dia:hover:not(.empty) {
+        background-color: rgba(128, 128, 128, 0.3);
+      }
+      .legenda {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .legenda .circulo {
+        width: 15px;
+        height: 15px;
+        background-color: blue;
+        border-radius: 50%;
+      }
+      .legenda div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        margin: 5px;
+      }
+      .botoes {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .edit {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .edit img {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+
+      .save {
+        background-color: #00c000;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+        display: none; /* Escondido por padrão, só aparece no modo de edição */
+      }
+
+      /* Classes para os status dos dias */
+      .dia.letivo {
+        background-color: blue;
+        color: white; /* Para melhor contraste */
+      }
+      .dia.falta {
+        background-color: red;
+        color: white; /* Para melhor contraste */
+      }
+      .dia.nao-letivo {
+        background-color: gray;
+        color: white; /* Para melhor contraste */
+      }
+
+      /* Estilos para o modo de edição */
+      body.editing .dia:not(.empty) {
+        cursor: pointer; /* Indica que o dia é clicável para edição */
+        border: 1px solid rgba(0, 0, 0, 0.2); /* Borda sutil para indicar clicável */
+      }
     </style>
-</head>
-<body>
-    <div class="conteiner">
-        <img src="img/calendario.png" alt="Calendário" />
-
-        <div class="mes" id="botoes-meses">
-            <!-- Botões do mês serão gerados via JS -->
+  </head>
+  <body>
+    <header>
+      <div class="welcome">
+        BEM VINDO, <strong id="nomeUsuario"> FULANO</strong>
+      </div>
+      <a href="menu.html">
+        <div class="home-button">
+          <img class="img_icon_home" src="../img/casa-simples-fina.png" />
         </div>
+      </a>
+    </header>
+    <main>
+      <img src="../img/calendario.png" alt="Calendário" />
 
-        <div class="calendario">
-            <h2 id="titulo-mes">Junho</h2>
-            <div class="calendario-box" id="calendario-box">
-                <!-- Dias da semana e dias do mês serão gerados aqui -->
-            </div>
+      <div class="mes" id="botoes-meses"></div>
+
+      <div class="calendario">
+        <h2 id="titulo-mes">Junho</h2>
+        <div class="calendario-box" id="calendario-box"></div>
+      </div>
+
+      <div class="legenda">
+        <div>
+          <p>Letivo</p>
+          <div class="circulo" style="background-color: blue"></div>
         </div>
-
-        <div class="legenda">
-            <div>
-                <p>Letivo</p>
-                <div class="circulo" style="background-color: blue;"></div>
-            </div>
-            <div>
-                <p>Falta</p>
-                <div class="circulo" style="background-color: red;"></div>
-            </div>
-            <div>
-                <p>Não letivo</p>
-                <div class="circulo" style="background-color: gray;"></div>
-            </div>
+        <div>
+          <p>Falta</p>
+          <div class="circulo" style="background-color: red"></div>
         </div>
-    </div>
+        <div>
+          <p>Não letivo</p>
+          <div class="circulo" style="background-color: gray"></div>
+        </div>
+      </div>
 
-<script>
-    const meses = [
+      <div class="botoes">
+        <button class="edit" id="btn-editar">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
+            alt="Editar"
+          />
+        </button>
+        <button class="save" id="btn-gravar">GRAVAR</button>
+      </div>
+    </main>
+
+    <footer>
+      <button class="exit-button">SAIR</button>
+    </footer>
+
+    <script>
+      const meses = [
         { nome: "Jan", completo: "Janeiro" },
         { nome: "Fev", completo: "Fevereiro" },
         { nome: "Mar", completo: "Março" },
@@ -160,59 +212,83 @@
         { nome: "Set", completo: "Setembro" },
         { nome: "Out", completo: "Outubro" },
         { nome: "Nov", completo: "Novembro" },
-        { nome: "Dez", completo: "Dezembro" }
-    ];
+        { nome: "Dez", completo: "Dezembro" },
+      ];
 
-    const diasSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
+      const diasSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
 
-    const botoesMeses = document.getElementById("botoes-meses");
-    const tituloMes = document.getElementById("titulo-mes");
-    const calendarioBox = document.getElementById("calendario-box");
+      const botoesMeses = document.getElementById("botoes-meses");
+      const tituloMes = document.getElementById("titulo-mes");
+      const calendarioBox = document.getElementById("calendario-box");
+      const btnEditar = document.getElementById("btn-editar");
+      const btnGravar = document.getElementById("btn-gravar");
 
-    let mesSelecionado = 5; // Junho (index 5, começando do 0)
-    let anoAtual = new Date().getFullYear();
+      let mesSelecionado = new Date().getMonth(); // Mês atual
+      let anoAtual = new Date().getFullYear();
+      let dadosCalendarioGlobal = {}; // Armazena os dados da API (incluindo id_calendario e status)
+      let isEditing = false; // Modo de edição
+      let changes = {}; // Armazena as alterações para salvar
 
-    function gerarBotoesMeses() {
+      // Mapeamento de descrições de status para IDs (AJUSTE OS IDs CONFORME SEU BANCO DE DADOS)
+      const statusMap = {
+        letivo: 6, // Assumindo id_status 1 para 'letivo'
+        falta: 8, // Assumindo id_status 2 para 'falta'
+        "não letivo": 7, // Assumindo id_status 3 para 'não letivo'
+        "nao letivo": 7, // Caso use 'nao letivo' sem cedilha/til
+      };
+
+      // Mapeamento de descrições de status para cores
+      const statusColors = {
+        letivo: "blue",
+        falta: "red",
+        "não letivo": "gray",
+        "nao letivo": "gray",
+        indefinido: "transparent", // Para dias sem status definido
+      };
+
+      // Função para gerar os botões dos meses
+      function gerarBotoesMeses() {
+        botoesMeses.innerHTML = ""; // Limpa antes de gerar
         meses.forEach((mes, index) => {
-            const btn = document.createElement("button");
-            btn.textContent = mes.nome;
-            btn.dataset.mes = index;
-            if(index === mesSelecionado) btn.classList.add("active");
-            btn.addEventListener("click", () => {
-                mesSelecionado = index;
-                atualizarCalendario();
-                atualizarBotoes();
-            });
-            botoesMeses.appendChild(btn);
+          const btn = document.createElement("button");
+          btn.textContent = mes.nome;
+          btn.dataset.mes = index;
+          if (index === mesSelecionado) btn.classList.add("active");
+          btn.addEventListener("click", () => {
+            mesSelecionado = index;
+            atualizarCalendario();
+            atualizarBotoes();
+          });
+          botoesMeses.appendChild(btn);
         });
-    }
+      }
 
-    function atualizarBotoes() {
+      function atualizarBotoes() {
         const botoes = botoesMeses.querySelectorAll("button");
         botoes.forEach((btn, index) => {
-            btn.classList.toggle("active", index === mesSelecionado);
+          btn.classList.toggle("active", index === mesSelecionado);
         });
-    }
+      }
 
-    function gerarDiasSemana() {
-        diasSemana.forEach(dia => {
-            const div = document.createElement("div");
-            div.classList.add("semana");
-            div.textContent = dia;
-            calendarioBox.appendChild(div);
+      function gerarDiasSemana() {
+        diasSemana.forEach((dia) => {
+          const div = document.createElement("div");
+          div.classList.add("semana");
+          div.textContent = dia;
+          calendarioBox.appendChild(div);
         });
-    }
+      }
 
-    function diasNoMes(mes, ano) {
+      function diasNoMes(mes, ano) {
         return new Date(ano, mes + 1, 0).getDate();
-    }
+      }
 
-    function diaSemanaDoPrimeiroDia(mes, ano) {
+      function diaSemanaDoPrimeiroDia(mes, ano) {
         return new Date(ano, mes, 1).getDay();
-    }
+      }
 
-    function atualizarCalendario() {
-        // Limpar dias antigos (tira os dias da semana, vamos redesenhar)
+      async function atualizarCalendario() {
+        // Limpar dias antigos
         calendarioBox.innerHTML = "";
 
         // Mostrar dias da semana
@@ -221,29 +297,449 @@
         // Atualizar título
         tituloMes.textContent = meses[mesSelecionado].completo;
 
-        const primeiroDiaSemana = diaSemanaDoPrimeiroDia(mesSelecionado, anoAtual);
+        const primeiroDiaSemana = diaSemanaDoPrimeiroDia(
+          mesSelecionado,
+          anoAtual
+        );
         const totalDias = diasNoMes(mesSelecionado, anoAtual);
 
+        // Chave para buscar os dados do mês/ano atual
+        const chaveMesAtual = `${anoAtual}-${String(
+          mesSelecionado + 1
+        ).padStart(2, "0")}`;
+        // Dias do mês com o novo formato (objeto com id e status)
+        const diasDoMesComDados = dadosCalendarioGlobal[chaveMesAtual] || {};
+
         // Adiciona os espaços vazios antes do primeiro dia do mês
-        for(let i = 0; i < primeiroDiaSemana; i++) {
-            const vazio = document.createElement("div");
-            vazio.classList.add("dia", "empty");
-            vazio.textContent = "";
-            calendarioBox.appendChild(vazio);
+        for (let i = 0; i < primeiroDiaSemana; i++) {
+          const vazio = document.createElement("div");
+          vazio.classList.add("dia", "empty");
+          calendarioBox.appendChild(vazio);
         }
 
         // Adiciona os dias do mês
-        for(let dia = 1; dia <= totalDias; dia++) {
-            const diaDiv = document.createElement("div");
-            diaDiv.classList.add("dia");
-            diaDiv.textContent = dia;
-            calendarioBox.appendChild(diaDiv);
-        }
-    }
+        for (let dia = 1; dia <= totalDias; dia++) {
+          const diaDiv = document.createElement("div");
+          diaDiv.classList.add("dia");
+          diaDiv.textContent = dia;
+          diaDiv.dataset.dia = dia; // Armazena o dia no dataset
 
-    // Inicializa
-    gerarBotoesMeses();
-    atualizarCalendario();
-</script>
-</body>
+          // Obter o objeto de dados para o dia (id_calendario e status)
+          const diaDados = diasDoMesComDados[dia] || {
+            id: null,
+            status: "indefinido",
+          };
+          const statusDoDia = diaDados.status;
+          const corDoStatus = statusColors[statusDoDia] || "transparent";
+
+          diaDiv.style.backgroundColor = corDoStatus;
+
+          // Adiciona a classe de status para styling adicional
+          if (statusDoDia !== "indefinido") {
+            // Substitui espaços por hífen para nome de classe CSS válido
+            diaDiv.classList.add(statusDoDia.replace(/\s/g, "-"));
+          }
+
+          // Adicionar evento de clique para edição
+          diaDiv.addEventListener("click", () => {
+            if (isEditing) {
+              // Passa o diaDiv, o dia do mês, a chave do mês e o id_calendario atual
+              alternarStatusDia(diaDiv, dia, chaveMesAtual, diaDados.id);
+            }
+          });
+
+          calendarioBox.appendChild(diaDiv);
+        }
+      }
+
+      // Função para alternar o status de um dia clicado em modo de edição
+      function alternarStatusDia(
+        diaDiv,
+        dia,
+        chaveMesAtual,
+        currentIdCalendario
+      ) {
+        // Agora, o status é obtido do objeto de dados completo
+        const currentData = dadosCalendarioGlobal[chaveMesAtual]?.[dia] || {
+          id: null,
+          status: "indefinido",
+        };
+        const currentStatus = currentData.status;
+        let newStatus;
+
+        // Lógica de alternância: letivo -> falta -> não letivo -> indefinido -> letivo
+        if (currentStatus === "letivo") {
+          newStatus = "falta";
+        } else if (currentStatus === "falta") {
+          newStatus = "não letivo";
+        } else if (
+          currentStatus === "não letivo" ||
+          currentStatus === "nao letivo"
+        ) {
+          newStatus = "indefinido"; // Retorna para "sem status"
+        } else {
+          newStatus = "letivo";
+        }
+
+        // Atualiza a cor e as classes CSS do dia
+        diaDiv.style.backgroundColor = statusColors[newStatus];
+        diaDiv.classList.remove("letivo", "falta", "nao-letivo"); // Remove classes antigas
+        if (newStatus !== "indefinido") {
+          diaDiv.classList.add(newStatus.replace(/\s/g, "-")); // Adiciona nova classe
+        }
+
+        // Armazena a alteração no objeto 'changes', incluindo o ID para saber se é UPDATE ou INSERT
+        if (!changes[chaveMesAtual]) {
+          changes[chaveMesAtual] = {};
+        }
+        changes[chaveMesAtual][dia] = {
+          id: currentIdCalendario, // Mantém o ID existente para UPDATE
+          status: newStatus,
+        };
+
+        // Atualiza o dado no objeto global temporariamente para refletir a mudança no front
+        if (!dadosCalendarioGlobal[chaveMesAtual]) {
+          dadosCalendarioGlobal[chaveMesAtual] = {};
+        }
+        dadosCalendarioGlobal[chaveMesAtual][dia] = {
+          id: currentIdCalendario, // Garante que o ID também seja atualizado no global
+          status: newStatus,
+        };
+      }
+
+      // Função para carregar os dados do calendário da API
+      async function carregarDadosCalendario() {
+        console.log("Iniciando carregarDadosCalendario()");
+
+        const token = sessionStorage.getItem("token"); // O token completo
+        console.log(
+          "Token obtido do sessionStorage:",
+          token ? "Token presente" : "Token ausente"
+        );
+
+        if (!token) {
+          console.log("Token ausente, redirecionando para login.");
+          alert("Usuário não autenticado. Redirecionando para login.");
+          window.location.href = "tela_login.html"; // Ou sua página de login
+          return {};
+        }
+
+        let idAluno; // Variável para armazenar o idAluno
+        try {
+          console.log("Tentando decodificar o token JWT...");
+          // 1. Decodificar o token JWT
+          const payloadBase64 = token.split(".")[1]; // Pega a segunda parte (o payload)
+          console.log("Payload Base64:", payloadBase64);
+
+          const decodedPayload = atob(payloadBase64); // Decodifica de Base64 para string JSON
+          console.log("Payload decodificado (string JSON):", decodedPayload);
+
+          const payload = JSON.parse(decodedPayload); // Converte a string JSON para objeto JavaScript
+          console.log("Payload parseado (objeto):", payload);
+
+          idAluno = payload.idAluno; // Pega o idAluno do payload
+          console.log("ID do Aluno extraído do token:", idAluno);
+
+          // Validação básica se o idAluno foi encontrado
+          if (!idAluno) {
+            console.error(
+              "ID do aluno não encontrado no token. Payload:",
+              payload
+            );
+            alert(
+              "Erro ao obter informações do usuário. Faça login novamente."
+            );
+            window.location.href = "tela_login.html";
+            return {};
+          }
+        } catch (error) {
+          console.error("Erro fatal ao decodificar o token JWT:", error);
+          alert(
+            "Token de autenticação inválido ou expirado. Faça login novamente."
+          );
+          window.location.href = "tela_login.html";
+          return {};
+        }
+
+        try {
+          console.log(
+            "Iniciando requisição FETCH para https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/calendario"
+          );
+          // Enviar o token no cabeçalho Authorization para a API (prática recomendada)
+          const resposta = await fetch(`https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/calendario`, {
+            headers: {
+              Authorization: `Bearer ${token}`, // Inclui o token JWT no cabeçalho
+            },
+          });
+
+          console.log("Resposta da API recebida. Status:", resposta.status);
+
+          if (!resposta.ok) {
+            // Se a API retornar um erro 401 (Não Autorizado) ou 403 (Proibido), o token pode ser inválido/expirado
+            if (resposta.status === 401 || resposta.status === 403) {
+              console.log(
+                "Erro de autenticação/autorização (401/403). Redirecionando."
+              );
+              alert("Sessão expirada ou não autorizada. Faça login novamente.");
+              window.location.href = "tela_login.html";
+              return {};
+            }
+            // Para outros erros HTTP, lança um erro
+            console.error(
+              `Erro HTTP ${resposta.status}: ${resposta.statusText}`
+            );
+            throw new Error(`HTTP error! status: ${resposta.status}`);
+          }
+
+          const dados = await resposta.json();
+          console.log("Dados brutos recebidos da API:", dados);
+
+          // Filtra apenas os registros do usuário logado usando o idAluno decodificado
+          console.log("Filtrando dados para id_aluno:", idAluno);
+          const dadosDoUsuario = dados.filter(
+            (c) => c.id_aluno === idAluno // Usa o idAluno decodificado aqui
+          );
+          console.log("Dados filtrados do usuário:", dadosDoUsuario);
+
+          // Agrupa os dias por mês/ano, armazenando o ID e o status
+          const mapa = {};
+          console.log("Iniciando mapeamento dos dados do usuário...");
+          dadosDoUsuario.forEach((c) => {
+            // Adiciona 'T00:00:00Z' para forçar a interpretação da data como UTC
+            const data = new Date(c.datas + "T00:00:00Z");
+
+            // Usa getUTCFullYear e getUTCMonth para obter o ano e mês em UTC
+            const chaveMes = `${data.getUTCFullYear()}-${String(
+              data.getUTCMonth() + 1
+            ).padStart(2, "0")}`;
+
+            if (!mapa[chaveMes]) {
+              mapa[chaveMes] = {};
+              console.log(`Criando nova chave de mês no mapa: ${chaveMes}`);
+            }
+            // Usa getUTCDate() para obter o dia do mês em UTC
+            mapa[chaveMes][data.getUTCDate()] = {
+              id: c.id_calendario, // É crucial que o ID seja retornado pela API
+              status: c.StatusDia?.descricao?.toLowerCase() || "indefinido",
+            };
+            console.log(
+              `Mapeado dia ${data.getUTCDate()} do mês ${chaveMes} com ID ${
+                c.id_calendario
+              } e status ${
+                c.StatusDia?.descricao?.toLowerCase() || "indefinido"
+              }`
+            );
+          });
+          console.log("Mapeamento concluído. Mapa final:", mapa);
+          return mapa;
+        } catch (err) {
+          console.error(
+            "Erro no FETCH ou processamento dos dados do calendário:",
+            err
+          );
+          alert(
+            "Erro ao carregar calendário. Verifique a conexão com a API e o console para detalhes."
+          );
+          return {};
+        } finally {
+          console.log("Finalizando carregarDadosCalendario().");
+        }
+      }
+      async function init() {
+        dadosCalendarioGlobal = await carregarDadosCalendario();
+        gerarBotoesMeses();
+        atualizarCalendario();
+      }
+
+      // Event listener para o botão de edição
+      btnEditar.addEventListener("click", () => {
+        isEditing = !isEditing; // Alterna o modo de edição
+        document.body.classList.toggle("editing", isEditing); // Adiciona/remove classe no body para estilos
+        btnGravar.style.display = isEditing ? "inline-block" : "none"; // Mostra/esconde o botão Gravar
+        alert(
+          isEditing ? "Modo de edição ATIVADO" : "Modo de edição DESATIVADO"
+        );
+      });
+
+      // Event listener para o botão de gravação
+      btnGravar.addEventListener("click", async () => {
+        const token = sessionStorage.getItem("token"); // Obtenha o token JWT
+        if (!token) {
+          alert("Usuário não autenticado. Impossível salvar.");
+          window.location.href = "tela_login.html"; // Redirecione se não houver token
+          return;
+        }
+
+        let idAluno;
+        try {
+          // Decodificar o token para obter o idAluno
+          const payloadBase64 = token.split(".")[1];
+          const decodedPayload = atob(payloadBase64);
+          const payload = JSON.parse(decodedPayload);
+          idAluno = payload.idAluno;
+
+          if (!idAluno) {
+            console.error("ID do aluno não encontrado no token.");
+            alert(
+              "Erro ao obter informações do usuário. Faça login novamente."
+            );
+            window.location.href = "tela_login.html";
+            return;
+          }
+        } catch (error) {
+          console.error("Erro ao decodificar o token JWT:", error);
+          alert(
+            "Token de autenticação inválido ou expirado. Faça login novamente."
+          );
+          window.location.href = "tela_login.html";
+          return;
+        }
+
+        const promessas = [];
+        // Itera sobre as alterações registradas
+        for (const chaveMes in changes) {
+          const [ano, mes] = chaveMes.split("-").map(Number);
+          for (const dia in changes[chaveMes]) {
+            // Desestrutura o ID do registro existente e o novo status do dia
+            const { id: idCalendarioExistente, status } =
+              changes[chaveMes][dia];
+
+            // Formata a data para o backend (YYYY-MM-DD)
+            const dataFormatada = `${ano}-${String(mes).padStart(
+              2,
+              "0"
+            )}-${String(dia).padStart(2, "0")}`;
+            const idStatus = statusMap[status]; // Converte a descrição do status para o ID
+
+            if (idStatus === undefined) {
+              console.warn(
+                `Status desconhecido para o dia ${dia} do mês ${chaveMes}: ${status}. Ignorando este dia.`
+              );
+              continue; // Pula este dia se o status for inválido
+            }
+
+            // Dados a serem enviados para a API
+            const apiData = {
+              datas: dataFormatada,
+              id_aluno: idAluno, // Use o idAluno decodificado aqui
+              id_status: idStatus,
+            };
+
+            // Cabeçalhos para incluir o token JWT
+            const headers = {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Inclua o token JWT aqui
+            };
+
+            if (idCalendarioExistente) {
+              // Se o ID do calendário existe, faz uma requisição PUT para atualizar
+              console.log(
+                `Atualizando (ID: ${idCalendarioExistente}): ${dataFormatada} para status ${status}`
+              );
+              promessas.push(
+                fetch(
+                  `https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/calendario/${idCalendarioExistente}`,
+                  {
+                    method: "PUT",
+                    headers: headers, // Use os cabeçalhos com o token
+                    body: JSON.stringify(apiData),
+                  }
+                )
+              );
+            } else {
+              // Se não há ID, faz uma requisição POST para criar um novo registro
+              console.log(`Criando: ${dataFormatada} com status ${status}`);
+              promessas.push(
+                fetch(`https://stunning-space-spoon-j6j5r6p4vx4cqxjr-5000.app.github.dev/api/calendario`, {
+                  method: "POST",
+                  headers: headers, // Use os cabeçalhos com o token
+                  body: JSON.stringify(apiData),
+                })
+              );
+            }
+          }
+        }
+
+        try {
+          const resultados = await Promise.allSettled(promessas);
+
+          let successCount = 0;
+          let errorMessages = [];
+
+          resultados.forEach((result) => {
+            if (result.status === "fulfilled") {
+              successCount++;
+            } else {
+              console.error("Erro ao processar requisição:", result.reason);
+              errorMessages.push(
+                result.reason.message || "Erro desconhecido ao salvar."
+              );
+            }
+          });
+
+          if (errorMessages.length > 0) {
+            alert(
+              `Concluído com ${successCount} sucessos e ${
+                errorMessages.length
+              } erros:\n${errorMessages.join("\n")}`
+            );
+          } else {
+            alert("Alterações salvas com sucesso!");
+          }
+
+          changes = {}; // Limpa as alterações
+          isEditing = false;
+          document.body.classList.remove("editing");
+          btnGravar.style.display = "none";
+          await init(); // Recarrega os dados e o calendário para refletir as alterações
+        } catch (error) {
+          console.error("Erro fatal ao salvar alterações:", error);
+          alert(
+            "Erro fatal ao salvar alterações. Verifique o console para mais detalhes."
+          );
+        }
+      });
+      // Inicializa o calendário ao carregar a página
+      init();
+    </script>
+
+<script type="module">
+    import { getFirstAndLastName } from './../src/js/utils/nameTrimmer.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const nomeUsuarioSpan = document.getElementById("nomeUsuario");
+        const token = sessionStorage.getItem("token");
+
+        if (token && nomeUsuarioSpan) {
+          try {
+            // Decodificar o token para obter o payload
+            const payloadBase64 = token.split(".")[1];
+            const decodedPayload = atob(payloadBase64);
+            const payload = JSON.parse(decodedPayload);
+            console.log("Payload decodificado:", payload);
+
+            // Verificar se o nome está presente no payload
+            if (payload.nome) {
+              nomeUsuarioSpan.textContent = getFirstAndLastName(payload.nome).toString();
+            } else {
+              console.warn("Nome do usuário não encontrado no payload do token.");
+              nomeUsuarioSpan.textContent = "USUÁRIO"; // Fallback
+            }
+          } catch (error) {
+            console.error("Erro ao decodificar o token ou extrair nome:", error);
+            nomeUsuarioSpan.textContent = "ERRO"; // Fallback em caso de erro na decodificação
+            // Opcional: alert("Token inválido. Faça login novamente.");
+            // window.location.href = "tela_login.html";
+          }
+        } else if (nomeUsuarioSpan) {
+          console.warn("Token JWT não encontrado no sessionStorage.");
+          nomeUsuarioSpan.textContent = "CONVIDADO"; // Fallback se não houver token
+          // Opcional: alert("Usuário não autenticado. Redirecionando para login.");
+          // window.location.href = "tela_login.html";
+        }
+      });
+  </script>
+
+
+  </body>
 </html>

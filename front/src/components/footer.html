@@ -1,0 +1,13 @@
+<!-- Common footer component -->
+<footer class="main-footer">
+  <button class="exit-button" onclick="handleLogout()">SAIR</button>
+</footer>
+
+<script>
+function handleLogout() {
+  // Clear any session data
+  sessionStorage.clear();
+  // Redirect to login page
+  window.location.href = 'tela_login.html';
+}
+</script> 
